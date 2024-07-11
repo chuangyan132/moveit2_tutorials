@@ -53,3 +53,37 @@ services:
         reservations:
           devices:
             - capabilities: [gpu]
+
+  demo_moveit_with_target:
+    extends: base
+    command: ros2 launch moveit2_tutorials demo.launch.py rviz_config:=kinova_hello_moveit.rviz
+
+  demo_moveit_with_target_pose:
+    extends: base
+    command: ros2 run hello_moveit hello_moveit
+
+  demo_moveit_group:
+    extends: base
+    # ros2 launch moveit2_tutorials move_group.launch.py
+    # ros2 launch moveit2_tutorials robot_model_and_robot_state_tutorial.launch.py
+    command: ros2 launch moveit2_tutorials move_group.launch.py
+
+
+  test_moveit_launch:
+    extends: base
+    command: ros2 launch test_moveit test_moveit.launch.py
+
+  test_moveit_target_move:
+    extends: base
+    command: ros2 launch test_moveit target_move.launch.py
+
+  test_moveit_gripper_down:
+    extends: base
+    command: ros2 launch test_moveit gripper_down.launch.py
+
+  test_moveit_gripper_control:
+    extends: base
+    command: ros2 launch test_moveit gripper_control.launch.py
+    environment:
+      - Z_DECREMENT=0.1  # Default value
+

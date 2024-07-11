@@ -39,5 +39,13 @@ ENV NVIDIA_REQUIRE_CUDA "cuda>=${CUDA_MAJOR_VERSION}.${CUDA_MINOR_VERSION}"
 
 # Set up the entrypoint for both container start and interactive terminals.
 COPY ./doc/how_to_guides/isaac_panda/.docker/ros_entrypoint.sh /opt/.ros/
+
+# Set the working directory
+WORKDIR /root/ws_moveit
+
+COPY ./doc/how_to_guides/test_moveit /root/ws_moveit/src/test_moveit
+RUN source /opt/ros/humble/setup.bash && \
+    cd /root/ws_moveit && \
+    colcon build --packages-select test_moveit
 RUN echo "source /opt/.ros/ros_entrypoint.sh" >> ~/.bashrc
 ENTRYPOINT [ "/opt/.ros/ros_entrypoint.sh" ]
