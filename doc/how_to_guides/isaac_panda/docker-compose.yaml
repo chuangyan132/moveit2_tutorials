@@ -87,3 +87,8 @@ services:
     environment:
       - Z_DECREMENT=0.1  # Default value
 
+
+  moveit_action_server:
+    extends: base
+    command: ros2 launch moveit_action_server moveit_action_server.launch.py
+
