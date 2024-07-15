@@ -116,7 +116,7 @@ public:
                             problem_expert_->removePredicate(plansys2::Predicate("(and(object_at red_cube pose1_d))"));
 
                             // set the goal for next state
-                            problem_expert_->setGoal(plansys2::Goal("(object_at blue_cube pose2_d)"));
+                            problem_expert_->setGoal(plansys2::Goal("(and(object_at blue_cube pose2_d))"));
 
                             // Compute the plan
                             auto domain = domain_expert_->getDomain();

@@ -54,7 +54,7 @@ class GripperControlAction : public plansys2::ActionExecutorClient
             // we use 0.0 distance to represent the state of gripper: close
             double gripper_state = 0.04;
 
-            // error: second goal will be aborted
+            // error: second goal will be aborted, we use sleep to avoid this error
             std::this_thread::sleep_for(std::chrono::seconds(10));
             auto goal_msg = gripper_action_interfaces::action::GripperControl::Goal();
             goal_msg.distance = gripper_state;

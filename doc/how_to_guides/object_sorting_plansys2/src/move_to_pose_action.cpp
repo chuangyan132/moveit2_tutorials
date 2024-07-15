@@ -45,7 +45,7 @@ public:
         pose.pose.orientation.w = 0.0;
         predefined_poses_["pose1_i"] = pose; // initial pose for pose1(first cube)
 
-        pose.pose.position.x = 0.3;
+        pose.pose.position.x = -0.3;
         pose.pose.position.y = -0.3;
         pose.pose.position.z = 0.1;
         predefined_poses_["pose1_d"] = pose; // desired pose for pose1(first cube)
