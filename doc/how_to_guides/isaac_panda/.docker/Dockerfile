@@ -56,6 +56,21 @@ RUN source /opt/ros/humble/setup.bash && \
     
 
 RUN source install/setup.bash && colcon build --packages-select gripper_action_server
-    
+
+
+RUN source /opt/ros/humble/setup.bash && \
+    cd /root && mkdir -p plansys2_ws/src && cd plansys2_ws/src && \
+    git clone -b humble-devel https://github.com/IntelligentRoboticsLabs/ros2_planning_system.git && \
+    cd ~/plansys2_ws && rosdep install -y -r -q --from-paths src --ignore-src --rosdistro humble && \
+    colcon build --symlink-install
+
+WORKDIR /root/plansys2_ws
+COPY ./doc/how_to_guides/object_sorting_plansys2 /root/plansys2_ws/src/object_sorting_plansys2
+
+RUN source /opt/ros/humble/setup.bash && \
+    source /root/ws_moveit/install/setup.bash && \
+    cd /root/plansys2_ws && \
+    source install/setup.bash && colcon build --packages-select object_sorting_plansys2
+
 RUN echo "source /opt/.ros/ros_entrypoint.sh" >> ~/.bashrc
 ENTRYPOINT [ "/opt/.ros/ros_entrypoint.sh" ]
