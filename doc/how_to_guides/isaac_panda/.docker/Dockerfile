@@ -46,11 +46,16 @@ WORKDIR /root/ws_moveit
 COPY ./doc/how_to_guides/test_moveit /root/ws_moveit/src/test_moveit
 COPY ./doc/how_to_guides/moveit_action_interfaces /root/ws_moveit/src/moveit_action_interfaces
 COPY ./doc/how_to_guides/moveit_action_server /root/ws_moveit/src/moveit_action_server
+COPY ./doc/how_to_guides/gripper_action_interfaces /root/ws_moveit/src/gripper_action_interfaces
+COPY ./doc/how_to_guides/gripper_action_server /root/ws_moveit/src/gripper_action_server 
 
 
 RUN source /opt/ros/humble/setup.bash && \
     cd /root/ws_moveit && \
-    colcon build --packages-select test_moveit moveit_action_interfaces moveit_action_server
+    colcon build --packages-select test_moveit moveit_action_interfaces moveit_action_server gripper_action_interfaces 
+    
+
+RUN source install/setup.bash && colcon build --packages-select gripper_action_server
     
 RUN echo "source /opt/.ros/ros_entrypoint.sh" >> ~/.bashrc
 ENTRYPOINT [ "/opt/.ros/ros_entrypoint.sh" ]

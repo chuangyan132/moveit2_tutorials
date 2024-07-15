@@ -92,3 +92,8 @@ services:
     extends: base
     command: ros2 launch moveit_action_server moveit_action_server.launch.py
 
+
+  gripper_control:
+    extends: base
+    command: ros2 launch gripper_action_server gripper_action_server.launch.py
+
